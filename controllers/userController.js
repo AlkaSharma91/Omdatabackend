@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import User from "../models/userModel.js";
+import { io } from "../server.js";
 import generateToken from "../utils/generateToken.js";
 
 
@@ -49,6 +50,7 @@ export const loginUser = async(req,res) =>{
     if(user && isAuth){
         const token=generateToken(user._id)
         console.log("user logged in successfully")
+       
         res.status(200).json({
             status:200,
             message:"user logged in successfully",

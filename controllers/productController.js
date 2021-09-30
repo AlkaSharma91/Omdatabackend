@@ -2,6 +2,7 @@ import multer from "multer";
 import Product from "../models/productModel.js";
 import { upload } from "../utils/useMulter.js";
 import fs from "fs";
+import { clients, io } from "../server.js";
 
 export const addProduct = async (req, res) => {
 
@@ -33,6 +34,11 @@ export const addProduct = async (req, res) => {
 
       const product = await Product.create({ user:req.user._id,name, price, description, image });
       if (product) {
+          // console.log("clients are",clients)
+          // let client= clients.find((client)=>client.customId==req.user._id)
+          // io.to(client.clientId).emit("event", req.user.name);
+          // console.log("client is",client);
+        
         return res.status(200).json({
           status: 200,
           message: "product added successfully",
